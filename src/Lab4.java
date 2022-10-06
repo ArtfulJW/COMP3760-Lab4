@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class Lab4 {
     
+    public Integer[] savedArray;
+    
+    public int recurse = 0;
     private int counterBruteForce = 0;
     private int counterBinarySearch = 0;
     
@@ -30,53 +33,100 @@ public class Lab4 {
         
     }
     
-    private int getPasscodeBinarySearch(Integer[] numList) {
-        // Ascertain that the counter will be an expected value before starting
-        setCounterBinarySearch(0);
+    private Integer[] BinarySearch(Integer[] numList, int low, int high, int middle, int median) {
         
-        System.out.println("LENGTH OF NUMLIST: " + numList.length);
-        
-        // Check middle value
-        int indexMiddle = (int)Math.ceil(numList.length/2);
-        int middleValue = numList[indexMiddle];
-       
-        
-        System.out.println("LHS: 0 to " + numList.length 
-                + " LENGTH OF LHS ARRAY: " 
-                + numList.length 
-                + " VALUE OF MIDDLE VALUE: " 
-                + middleValue
-                + " VALUE OF START OF ARRAY: "
-                + numList[0]);
+        if (numList[middle] <= median) {
+            // Something missing...
+            System.out.println(numList[low] + " " + numList[middle] + " " + median + " " + high);
+            
+            low = middle;
+            middle = numList.length - numList[low];
+            median = (numList[low] + numList[high])/2;
+            System.out.println(numList[low] + " " + numList[middle] + " " + median + " " + high);
 
-        if (indexMiddle < numList.length -1) {
-            if (middleValue-1 != numList[indexMiddle-1]) {
-                System.out.println(middleValue-1 + " " + numList[indexMiddle-1]);
-                return middleValue-1;
-            } else if (middleValue+1 != numList[indexMiddle+1]){
-                System.out.println(middleValue+1+ " " +numList[indexMiddle+1]);
-                return middleValue+1;
-            }
+        } else {
+            
         }
         
-        System.out.println("RHS: 0 to " + numList.length 
-                + " LENGTH OF RHS ARRAY: " 
-                + numList.length 
-                + " VALUE OF MIDDLE VALUE: " 
-                + middleValue
-                + " VALUE OF END OF ARRAY: "
-                + numList[numList.length-1]);
+        return numList;
+    }
+    
+    private int getPasscodeBinarySearch(Integer[] numList) {  
+        // Ascertain that the counter will be an expected value before starting
+        setCounterBinarySearch(0);
 
-        if (numList.length > 3) {
-            // Check left side
-            Integer[] leftArray = new Integer[(int)Math.ceil(numList.length/2)];
-            copyArray(numList, leftArray, 0 , indexMiddle);
-            getPasscodeBinarySearch(leftArray);
-            // Check right side
-            Integer[] rightArray = new Integer[(int)Math.ceil(numList.length/2)];
-            copyArray(numList, rightArray, indexMiddle , numList.length-1);
-            getPasscodeBinarySearch(rightArray);
-        } 
+        
+//        // Check middle value
+//        int indexMiddle = (int)Math.ceil(numList.length/2);
+//        int middleValue = numList[indexMiddle];
+//        
+//        if (numList.length > 2) {
+//            System.out.println("LENGTH OF NUMLIST: " + numList.length 
+//                    + "\nLEFT OF MIDDLE: " + numList[indexMiddle-1]
+//                    + "\nMIDDLE VALUE: " + middleValue
+//                    + "\nRIGHT OF MIDDLE: " + numList[indexMiddle+1] + "\n");
+//        } else {
+//            System.out.println("LENGTH OF NUMLIST: " + numList.length 
+//                    + "\nINDEX 0: " + numList[0] 
+//                    + "\nINDEX 1: " + numList[1]);
+//        }
+//        
+//        
+//        if ((numList[0]+1 == numList[1]) && numList.length == 2) {
+//            return -1;
+//        } else {
+//            if (middleValue-1 != numList[indexMiddle-1] && numList.length > 2) {
+//                System.out.println(middleValue-1 + " " + numList[indexMiddle-1]);
+//                return middleValue-1;
+//            }
+//            
+//            if (middleValue+1 != numList[indexMiddle+1] && numList.length > 2){
+//                System.out.println(middleValue+1+ " " +numList[indexMiddle+1]);
+//                return middleValue+1;
+//            } else if (numList[1]-1 != numList[0]){
+//                return numList[0];
+//            }
+//        }
+//            
+//        // Check left side
+//        Integer[] leftArray = new Integer[(int)Math.ceil(numList.length/2)];
+//        System.out.println("LHS");
+//        copyArray(numList, leftArray, 0 , indexMiddle);
+//        if (getPasscodeBinarySearch(leftArray) < 0) {
+//            System.out.println("Missing Number not on left side.");
+//            recurse = -1;
+//        }
+//        
+////            for (Integer x : savedArray) {
+////                System.out.println(x);
+////            }
+//        
+//        
+//        // Check right side
+//        Integer[] rightArray = new Integer[(int)Math.ceil(savedArray.length/2)];
+//        System.out.println("RHS");
+//        copyArray(numList, rightArray, indexMiddle , numList.length-1);
+//        if (getPasscodeBinarySearch(rightArray) < 0) {
+//            System.out.println("Missing Number not on right side.");
+//            recurse = -1;
+//        }
+//        
+        
+//        System.out.println("LHS: " + numList[0] + " to " + numList.length 
+//                + " LENGTH OF LHS ARRAY: " 
+//                + numList.length 
+//                + " VALUE OF MIDDLE VALUE: " 
+//                + middleValue
+//                + " VALUE OF START OF ARRAY: "
+//                + numList[0]);
+//        
+//        System.out.println("RHS: " + numList[0] + " to " + numList.length 
+//                + " LENGTH OF RHS ARRAY: " 
+//                + numList.length 
+//                + " VALUE OF MIDDLE VALUE: " 
+//                + middleValue
+//                + " VALUE OF END OF ARRAY: "
+//                + numList[numList.length-1]);
       
 
         
@@ -128,9 +178,10 @@ public class Lab4 {
     // Range based copy.
     private void copyArray(Integer[] inputArray, Integer[] outputArray, int rangeLow, int rangeHigh) {
         int index = 0;
-        
+//        System.out.println(rangeLow);
+//        System.out.println(rangeHigh);
         for (int x = rangeLow; x < rangeHigh; x++) {
-            outputArray[x] = inputArray[x];
+            outputArray[x-rangeLow] = inputArray[x];
         }
         
 //        for (Integer x : numList) {
@@ -186,7 +237,10 @@ public class Lab4 {
         
         int missingNumberBrute = getPasscodeBruteForce(outputArray);
         System.out.println("Brute Force Missing Number: " + missingNumberBrute);
-        int missingNumberBinary = getPasscodeBinarySearch(outputArray);
+        
+        savedArray = outputArray;
+        
+        int missingNumberBinary = getPasscodeBinarySearch(BinarySearch(outputArray,0,outputArray.length-1,outputArray.length/2,0+(outputArray[outputArray.length-1])/2));
         System.out.println("Binary Search Missing Number: " + missingNumberBinary);
         
         // Output for Debug
@@ -203,7 +257,7 @@ public class Lab4 {
         
         Lab4 BOT = new Lab4();
         try {
-            BOT.parseFile("C:\\Users\\jj554\\Documents\\BCIT\\CST-Level-3\\COMP-3760\\Lab-4\\src\\length_3_N_429.txt");
+            BOT.parseFile("src\\length_3_N_429.txt");
 //            System.out.println("Brute Force Counter: " + BOT.bruteForceComparisons());
 //            BOT.parseFile("C:\\Users\\jj554\\Documents\\BCIT\\CST-Level-3\\COMP-3760\\Lab-4\\src\\length_4_N_0930.txt");
         } catch (FileNotFoundException e) {
