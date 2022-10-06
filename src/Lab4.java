@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+// Name: Jay Wang
+// ID: A01291640
+
 public class Lab4 {
-    
-    public Integer[] savedArray;
     
     public int missingNumber = 0;
     private int counterBruteForce = 0;
     private int counterBinarySearch = 0;
     
+    // Brute Force Search Implementation
     private int getPasscodeBruteForce(Integer[] numList) {
         // Ascertain that the counter will be an expected value before starting
         setCounterBruteForce(0);
@@ -33,33 +35,7 @@ public class Lab4 {
         
     }
     
-    private int BinarySearch(Integer[] numList) {
-        
-        int low = 0;
-        int high = numList.length-1;
-      
-        while (low <= high) {
-            
-            int median = (low + high) / 2;
-            System.out.println("Median: " + median + " numList[median] = " + numList[median]
-                    + "\nLeft of median " +numList[(median)-1] + " Right of median " +numList[(median)+1]);
-            
-            // Check middle element
-            if (numList[median] != median + 1 && numList[median - 1] == median) {
-                return median + 1;
-            }
-            if (numList[median] == median + 1) {
-                low = median + 1;
-            } else {
-                high = median -1;
-            }
-            
-        }
-        
-        // Nothing missing
-        return -1;
-    }
-    
+    // Implementation of BinarySearch
     private int getPasscodeBinarySearch(Integer[] numList) {  
         // Ascertain that the counter will be an expected value before starting
         
@@ -68,6 +44,7 @@ public class Lab4 {
         int indexMiddle = (int)Math.ceil(numList.length/2);
         int middleValue = numList[indexMiddle]; 
         
+        // Base case checks and assignment operator to class variable missingNumber
         if (((numList[0]+1 == numList[1]) && (numList[numList.length-2]+1 == numList[numList.length-1])) && numList.length == 2) {
             // Array of Size two where there is no missing number.
             return -1;
@@ -92,7 +69,8 @@ public class Lab4 {
                 setCounterBinarySearch(binarySearchComparisons() + 1);
             } 
         }
-
+        
+        // If Else to ascertain even and odd cases
         if (numList.length % 2 == 0) {
             // Check left side
             Integer[] leftArray = new Integer[(int)Math.ceil(numList.length/2)];
@@ -130,8 +108,6 @@ public class Lab4 {
         return -1;
         
     }
-    
-    
     
     // Helper Function: FormatString
     // Removes Leading 0's from String
