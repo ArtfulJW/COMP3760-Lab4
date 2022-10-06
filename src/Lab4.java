@@ -62,11 +62,11 @@ public class Lab4 {
     
     private int getPasscodeBinarySearch(Integer[] numList) {  
         // Ascertain that the counter will be an expected value before starting
-
+        
         
         // Check middle value
         int indexMiddle = (int)Math.ceil(numList.length/2);
-         int middleValue = numList[indexMiddle];
+        int middleValue = numList[indexMiddle];
         
 //        if (numList.length > 2) {
 //            System.out.println("LENGTH OF NUMLIST: " + numList.length 
@@ -95,7 +95,7 @@ public class Lab4 {
                 if (missingNumber > (middleValue-1)) {
                     missingNumber =  middleValue-1;
                 }
-                missingNumber = middleValue-1;
+//                missingNumber = middleValue-1;
                 setCounterBinarySearch(binarySearchComparisons() + 1);
             }
             
@@ -295,6 +295,7 @@ public class Lab4 {
         System.out.println("Brute Force Missing Number: " + missingNumberBrute);   
         
         //int missingNumberBinary = getPasscodeBinarySearch(BinarySearch(outputArray,0,outputArray.length-1,outputArray.length/2,0+(outputArray[outputArray.length-1])/2));
+        missingNumber = outputArray[outputArray.length-1];
         getPasscodeBinarySearch(outputArray);
         int missingNumberBinary = missingNumber;
         System.out.println("Number of Comparisons: " + binarySearchComparisons());
